@@ -1,54 +1,107 @@
 <template>
   <div id="app">
-    <header>
-      <span>Vue.js PWA</span>
-    </header>
-    <main>
-      <img src="./assets/logo.png" alt="Vue.js PWA">
-      <router-view></router-view>
-    </main>
+    <div class="container">
+      <div class="row">
+        <div v-for="post in posts" class="post" :key="post.title" v-bind:class="postSizeClass(post)">
+          <post-card v-bind:post="post"></post-card>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import axios from 'axios';
+import PostCard from './components/PostCard';
+
 export default {
   name: 'app',
+  components: {
+    PostCard,
+  },
+  data() {
+    return {
+      posts: [
+        {
+          title: 'Foobar',
+          tags: ['open source'],
+          intro: 'Lorem blogum and some content to match...',
+          img: 'http://via.placeholder.com/350x300',
+        },
+        {
+          title: 'Foobar',
+          tags: ['open source'],
+          intro: 'Lorem blogum and some content to match...',
+        },
+        {
+          title: 'Foobar',
+          tags: ['open source'],
+          intro: 'Lorem blogum and some content to match...',
+        },
+        {
+          title: 'Foobar',
+          tags: ['open source'],
+          intro: 'Lorem blogum and some content to match...',
+          img: 'http://via.placeholder.com/350x300',
+        },
+        {
+          title: 'Foobar',
+          tags: ['open source'],
+          intro: 'Lorem blogum and some content to match...',
+        },
+        {
+          title: 'Foobar',
+          tags: ['open source'],
+          intro: 'Lorem blogum and some content to match...',
+        },
+        {
+          title: 'Foobar',
+          tags: ['open source'],
+          intro: 'Lorem blogum and some content to match...',
+        },
+        {
+          title: 'Foobar',
+          tags: ['open source'],
+          intro: 'Lorem blogum and some content to match...',
+        },
+        {
+          title: 'Foobar',
+          tags: ['open source'],
+          intro: 'Lorem blogum and some content to match...',
+        },
+        {
+          title: 'Foobar',
+          tags: ['open source'],
+          intro: 'Lorem blogum and some content to match...',
+        },
+      ],
+    };
+  },
+  methods: {
+    postSizeClass: (post) => {
+      if ('img' in post) {
+        return 'col-md-8';
+      }
+      return 'col-md-4';
+    },
+  },
+  created: () => {
+    const API = 'http://vagrant.local';
+    axios.get(`${API}/wp-json/wp/v2/posts?categories_exclude=3`)
+      .then((response) => {
+        // JSON responses are automatically parsed.
+        // eslint-disable-next-line no-console
+        console.log(response.data);
+        // this.posts = response.data
+      })
+      .catch((e) => {
+        this.errors.push(e);
+      });
+  },
 };
 </script>
 
-<style>
-body {
-  margin: 0;
-}
+<style lang="scss">
+@import "~bootstrap/scss/bootstrap";
 
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
-}
-
-main {
-  text-align: center;
-  margin-top: 40px;
-}
-
-header {
-  margin: 0;
-  height: 56px;
-  padding: 0 16px 0 24px;
-  background-color: #35495E;
-  color: #ffffff;
-}
-
-header span {
-  display: block;
-  position: relative;
-  font-size: 20px;
-  line-height: 1;
-  letter-spacing: .02em;
-  font-weight: 400;
-  box-sizing: border-box;
-  padding-top: 16px;
-}
 </style>
