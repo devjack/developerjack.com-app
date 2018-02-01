@@ -3,7 +3,7 @@
     <img :if="post.img" class="card-img-left flex-auto" :src="post.img">
     <div class="card-body  card-body d-flex flex-column align-items-start">
       <h3>{{post.title}}</h3>
-      <span :v-for="tag in post.tags" class="tag">{{tag}}</span>
+      <span v-for="tag in post.tags" :key="tag" class="tag">{{ tag }}</span>
       <p>
         {{post.intro}}
       </p>
