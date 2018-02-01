@@ -1,0 +1,30 @@
+[
+    {
+      "name": "twitter",
+      "href": "https://www.twitter.com/developerjack"
+    },
+    {
+        "name": "linkedin",
+        "href": "https://www.linkedin.com/in/developerjack"
+    },
+    {
+      "name": "instagram",
+      "href": "https://instagram.com/developerjack"
+    },
+    {
+        "name": "github",
+        "href": "https://github.com/devjack"
+    },
+    {
+      "name": "facebook",
+      "href": "https://www.facebook.com/profile.php?id=100011025072440"
+    },
+    {
+      "name": "flickr",
+      "href": "https://www.flickr.com/photos/142140756@N03"
+    },
+    {
+      "name": "gplus",
+      "href": "https://plus.google.com/111650013076489260266"
+    }
+  ]

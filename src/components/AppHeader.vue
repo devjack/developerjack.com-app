@@ -6,7 +6,7 @@
       </a>
       <ul id="social">
         <li v-for="network in social" :key="network.name">
-          <a href="https://developerjack.com/" :title="network.name">
+          <a v-bind:href="network.href" :title="network.name" target="_blank">
               <font-awesome-icon :icon="faIconFromName(network.name)" size="lg" />
           </a>
         </li>
@@ -32,6 +32,9 @@ import {
   faTwitter,
   faPinterest,
   faGithub,
+  faLinkedinIn,
+  faFlickr,
+  faGooglePlusG,
   faInstagram,
 } from '@fortawesome/fontawesome-free-brands';
 import {
@@ -46,8 +49,6 @@ export default {
   },
   methods: {
     faIconFromName: (icon) => {
-      // eslint-disable-next-line no-console
-      console.log(icon);
       switch (icon) {
         case 'coffee': return faCoffee;
         case 'twitter': return faTwitter;
@@ -55,31 +56,11 @@ export default {
         case 'pinterest': return faPinterest;
         case 'github': return faGithub;
         case 'facebook': return faFacebook;
+        case 'linkedin': return faLinkedinIn;
+        case 'flickr': return faFlickr;
+        case 'gplus': return faGooglePlusG;
         default: return faCoffee;
       }
-    },
-  },
-  computed: {
-    icon() {
-      return faCoffee;
-    },
-    coffee() {
-      return faCoffee;
-    },
-    twitter() {
-      return faTwitter;
-    },
-    instagram() {
-      return faInstagram;
-    },
-    pinterest() {
-      return faPinterest;
-    },
-    facebook() {
-      return faFacebook;
-    },
-    github() {
-      return faGithub;
     },
   },
   props: {

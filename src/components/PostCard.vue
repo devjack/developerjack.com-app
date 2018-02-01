@@ -4,9 +4,7 @@
     <div class="card-body  card-body d-flex flex-column align-items-start">
       <h3>{{post.title}}</h3>
       <span v-for="tag in post.tags" :key="tag" class="tag">{{ tag }}</span>
-      <p>
-        {{post.intro}}
-      </p>
+      <p v-html="post.intro"></p>
     </div>
     <!-- <div class="post-image">
       <img src="http://via.placeholder.com/350x300">
@@ -54,6 +52,7 @@ export default {
 <style lang="scss" scoped>
 .post-card.card {
   height: 300px;
+  overflow: hidden;
 
   .post-image {
     float: left;
