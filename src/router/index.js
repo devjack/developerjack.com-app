@@ -21,6 +21,7 @@ export default new Router({
       ],
       name: 'Post',
       component: Post,
+      props: true,
     },
   ],
 });
