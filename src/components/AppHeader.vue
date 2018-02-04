@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <nav id="navbar" class="navbar">
-      <a class="navbar-brand" href="#">
+      <a class="navbar-brand" href="/">
         {{title}}
       </a>
       <ul id="social">
@@ -16,7 +16,8 @@
     
     <div id="menu">
       <ul class="menu">
-        <li><a href="#" class="menu-link">Home</a></li>
+
+        <li>  <router-link to="/" class="menu-link">Home</router-link></li>
         <li><a href="#" class="menu-link">Blog</a></li>
         <li><a href="#" class="menu-link">The Weekly</a></li>
         <li><a href="#" class="menu-link">Press</a></li>

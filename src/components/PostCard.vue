@@ -2,7 +2,10 @@
   <article class="card post-card  flex-md-row mb-4 box-shadow h-md-250">
     <img :if="post.img" class="card-img-left flex-auto" :src="post.img">
     <div class="card-body  card-body d-flex flex-column align-items-start">
-      <h3>{{post.title}}</h3>
+      <h3>
+        <router-link :to="{ path: path}">{{post.title}}</router-link>
+        <!-- <a :href="path">{{post.title}}</a> -->
+        </h3>
       <span v-for="tag in post.tags" :key="tag" class="tag">{{ tag }}</span>
       <p v-html="post.intro"></p>
     </div>
@@ -32,6 +35,10 @@ export default {
         type: String,
         required: true,
       },
+      link: {
+        type: String,
+        required: true,
+      },
       tags: {
         type: Array,
         required: true,
@@ -44,6 +51,12 @@ export default {
         type: String,
         required: false,
       },
+    },
+  },
+  computed: {
+    path() {
+      const url = new URL(this.post.link);
+      return url.pathname;
     },
   },
 };
