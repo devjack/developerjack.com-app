@@ -1,9 +1,8 @@
 <template>
   <div class="container">
     <nav id="navbar" class="navbar">
-      <a class="navbar-brand" href="/">
-        {{title}}
-      </a>
+      <router-link to="/" class="navbar-brand" v-html="title"></router-link>
+
       <ul id="social">
         <li v-for="network in social" :key="network.name">
           <a v-bind:href="network.href" :title="network.name" target="_blank">
@@ -17,9 +16,9 @@
     <div id="menu">
       <ul class="menu">
 
-        <li>  <router-link to="/" class="menu-link">Home</router-link></li>
-        <li><a href="#" class="menu-link">Blog</a></li>
-        <li><a href="#" class="menu-link">The Weekly</a></li>
+        <li><router-link to="/" class="menu-link">Home</router-link></li>
+        <li><router-link to="/blog" class="menu-link">Blog</router-link></li>
+        <li><router-link to="/weekly" class="menu-link">The Weekly</router-link></li>
         <li><a href="#" class="menu-link">Press</a></li>
       </ul>
     </div>
@@ -143,6 +142,7 @@ div#menu {
       a, a:visited {
         text-decoration: none;
         color: var(--gray-dark);
+        font-weight: 500;
       }
     }
   }

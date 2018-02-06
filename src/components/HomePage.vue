@@ -11,6 +11,7 @@
 <script>
 import axios from 'axios';
 import PostCard from '@/components/PostCard';
+import Settings from '@/config';
 
 export default {
   name: 'HomePage',
@@ -32,8 +33,7 @@ export default {
   },
   created() {
     const self = this;
-    const API = 'http://vagrant.local';
-    axios.get(`${API}/wp-json/wp/v2/posts?categories_exclude=3`)
+    axios.get(`${Settings.API}/wp-json/wp/v2/posts?categories_exclude=3`)
       .then((response) => {
         // JSON responses are automatically parsed.
         // eslint-disable-next-line no-console
@@ -58,7 +58,6 @@ export default {
       .catch((e) => {
         // eslint-disable-next-line no-console
         console.log(e);
-        // this.errors.push(e);
       });
   },
   methods: {
