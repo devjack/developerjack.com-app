@@ -18,8 +18,7 @@ export default new Router({
       path: '/:categorySlug/',
       // @TODO: path param filtering (year/day etc)
       alias: [
-        '/:categorySlug/:year/:month/:day/', // Sculpin routes.
-        '/:categorySlug/:year/', // Hugo routes
+        // '/:categorySlug/:year/:month/:day/', // Sculpin routes.
       ],
       name: 'CategoryIndex',
       component: CategoryIndex,

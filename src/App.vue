@@ -7,7 +7,6 @@
 </template>
 
 <script>
-// import axios from 'axios';
 import AppHeader from './components/AppHeader';
 import HomePage from './components/HomePage';
 

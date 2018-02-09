@@ -21,6 +21,8 @@
     "axios": "^0.17.1",
     "bootstrap": "^4.0.0",
     "jslint": "^0.11.0",
+    "moment": "^2.20.1",
+    "reading-time": "^1.1.0",
     "vue": "^2.5.2",
     "vue-config": "^1.0.0",
     "vue-router": "^3.0.1"

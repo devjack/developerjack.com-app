@@ -1,7 +1,7 @@
 <template>
   <div id="post" class="container">
-    <div class="row">
-      <div class="col-md-12">
+    <div class="row justify-content-md-center">
+      <div class="col-md-10 col-">
         <div class="loading" v-if="loading">
           Loading...
         </div>
@@ -13,6 +13,10 @@
         <article v-if="post" class="content">
           <header>
             <h1 v-html="post.title.rendered"></h1>
+            <ul>
+              <li v-html="displayDate"></li>
+              <li v-html="readingTime"></li>
+            </ul>
           </header>
           <main v-html="post.content.rendered"></main>
 
@@ -24,6 +28,9 @@
 
 <script>
 import axios from 'axios';
+import moment from 'moment';
+import readingTime from 'reading-time';
+import Settings from '@/config';
 
 export default {
   name: 'Post',
@@ -34,6 +41,20 @@ export default {
       post: null,
       error: null,
     };
+  },
+  computed: {
+    displayDate() {
+      if (!this.post) {
+        return null;
+      }
+      return moment().format('D MMMM YYYY');
+    },
+    readingTime() {
+      if (!this.post) {
+        return null;
+      }
+      return readingTime(this.post.content.rendered).text;
+    },
   },
   created() {
     // fetch the data when the view is created and the data is
@@ -50,17 +71,14 @@ export default {
       this.post = null;
       this.loading = true;
 
-      const API = 'http://vagrant.local';
       // eslint-disable-next-line no-unused-vars
       const slug = this.slug;
       // TODO: This assumes no posts of the same slug in different categories.
       // In the event of two duplicate slugs in different categories,
       //   the post shown is undefined (using the first result from the API impl.)
-      axios.get(`${API}/wp-json/wp/v2/posts?slug=${slug}`)
+      axios.get(`${Settings.API}/wp-json/wp/v2/posts?slug=${slug}`)
         .then((response) => {
           this.loading = false;
-          // eslint-disable-next-line no-console
-          console.log(response.data);
           if (response.data.length === 0) {
             this.error = '404 post not found';
           } else if (response.data.length > 1) {
@@ -82,6 +100,34 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+header {
+  ul {
+    list-style-type: none;
+    li {
+      display: inline;
+      padding: auto 1rem;
+      &:after {
+        content: " | ";
+      }
+      &:last-child:after {
+        content: "";
+      }
+    }
+  }
+}
+.alignleft {
+    width: 50%;
+    float: left;
+    margin-right: 1.5em;
+}
+.alignright {
+    width: 50%;
+    float: right;
+    margin-left: 1.5em;
+}
+.wp-block-image {
+  text-align: center;
+}
 
 </style>
