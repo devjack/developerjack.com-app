@@ -20,13 +20,6 @@ export default {
   data() {
     return {
       posts: [
-        {
-          title: 'Foobar1',
-          tags: ['open source'],
-          intro: 'Lorem blogum and some content to match...',
-          img: '/static/img/profile/profile_sq_small.png',
-          link: 'https://foo.bar/blogum-ipsum',
-        },
       ],
     };
   },

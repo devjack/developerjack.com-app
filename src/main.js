@@ -14,6 +14,17 @@ Vue.config.productionTip = false;
 Vue.mixin({
   data() {
     return {
+      get appBaseUrl() {
+        const appRefHref = document.querySelector('link[rel="app.developerjack.com"]');
+
+        /* eslint-disable no-console */
+        console.log(appRefHref);
+
+        if (!appRefHref) {
+          return 'https://app.developerjack.com/';
+        }
+        return appRefHref.getAttribute('href');
+      },
       get apiBaseUrl() {
         const wpRelHref = document.querySelector('link[rel="https://api.w.org/"]');
 
