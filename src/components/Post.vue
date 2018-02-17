@@ -30,7 +30,6 @@
 import axios from 'axios';
 import moment from 'moment';
 import readingTime from 'reading-time';
-import Settings from '@/config';
 
 export default {
   name: 'Post',
@@ -67,6 +66,7 @@ export default {
   },
   methods: {
     fetchData() {
+      const self = this;
       this.error = null;
       this.post = null;
       this.loading = true;
@@ -76,7 +76,7 @@ export default {
       // TODO: This assumes no posts of the same slug in different categories.
       // In the event of two duplicate slugs in different categories,
       //   the post shown is undefined (using the first result from the API impl.)
-      axios.get(`${Settings.API}/wp-json/wp/v2/posts?slug=${slug}`)
+      axios.get(`${self.apiBaseUrl}wp/v2/posts?slug=${slug}`)
         .then((response) => {
           this.loading = false;
           if (response.data.length === 0) {

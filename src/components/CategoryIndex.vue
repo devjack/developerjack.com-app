@@ -16,7 +16,6 @@
 <script>
 import axios from 'axios';
 import PostCard from '@/components/PostCard';
-import Settings from '@/config';
 
 export default {
   name: 'CategoryIndex',
@@ -67,7 +66,7 @@ export default {
     },
     setCategoryBySlug(categorySlug) {
       const self = this;
-      return axios.get(`${Settings.API}/wp-json/wp/v2/categories?slug=${categorySlug}`)
+      return axios.get(`${self.apiBaseUrl}wp/v2/categories?slug=${categorySlug}`)
         .then((response) => {
           self.category = response.data[0]; // Assume the first and only category
         })
@@ -78,7 +77,7 @@ export default {
     },
     setPostsFromCategory(categoryId) {
       const self = this;
-      axios.get(`${Settings.API}/wp-json/wp/v2/posts?categories=${categoryId}`)
+      axios.get(`${self.apiBaseUrl}wp/v2/posts?categories=${categoryId}`)
         .then((response) => {
           let apiPost = null;
           const posts = [];

@@ -11,7 +11,6 @@
 <script>
 import axios from 'axios';
 import PostCard from '@/components/PostCard';
-import Settings from '@/config';
 
 export default {
   name: 'HomePage',
@@ -33,7 +32,9 @@ export default {
   },
   created() {
     const self = this;
-    axios.get(`${Settings.API}/wp-json/wp/v2/posts?categories_exclude=3`)
+    const apiBase = this.apiBaseUrl;
+    // eslint-disable-next-line no-console
+    axios.get(`${apiBase}wp/v2/posts?categories_exclude=3`)
       .then((response) => {
         // JSON responses are automatically parsed.
         // eslint-disable-next-line no-console

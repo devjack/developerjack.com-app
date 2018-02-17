@@ -11,6 +11,21 @@ fontawesome.library.add(light);
 
 Vue.config.productionTip = false;
 
+Vue.mixin({
+  data() {
+    return {
+      get apiBaseUrl() {
+        const wpRelHref = document.querySelector('link[rel="https://api.w.org/"]');
+
+        if (!wpRelHref) {
+          return 'https://content.developerjack.com/wp-json/';
+        }
+        return wpRelHref.getAttribute('href');
+      },
+    };
+  },
+});
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
