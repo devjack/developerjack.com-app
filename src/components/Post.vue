@@ -64,6 +64,15 @@ export default {
     // call again the method if the route changes
     $route: 'fetchData',
   },
+  updated() {
+    // Once the post is rendered, check for embedded tweets.
+    if (this.$el.querySelector('.twitter-tweet')) {
+      // eslint-disable-next-line no-underscore-dangle
+      window.twttr.widgets.load(
+        document.getElementById('post'),
+      );
+    }
+  },
   methods: {
     fetchData() {
       const self = this;
@@ -128,6 +137,12 @@ header {
 }
 .wp-block-image {
   text-align: center;
+}
+
+figure.wp-block-embed.aligncenter twitterwidget {
+  // Yeah ok whatever its ahack.
+    margin-left: auto;
+    margin-right: auto;
 }
 
 </style>

@@ -3,7 +3,7 @@
     <img :if="post.img" class="card-img-left flex-auto" :src="post.img">
     <div class="card-body  card-body d-flex flex-column align-items-start">
       <h3>
-        <router-link :to="{ path: path}">{{post.title}}</router-link>
+        <router-link :to="{ path: path}" v-html="post.title"></router-link>
         <!-- <a :href="path">{{post.title}}</a> -->
         </h3>
       <span v-for="tag in post.tags" :key="tag" class="tag">{{ tag }}</span>
