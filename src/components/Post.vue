@@ -145,4 +145,6 @@ figure.wp-block-embed.aligncenter twitterwidget {
     margin-right: auto;
 }
 
+@import "../scss/_weekly";
+
 </style>
