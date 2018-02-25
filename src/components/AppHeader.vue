@@ -106,10 +106,14 @@ nav#navbar {
 ul#social {
   margin:0;
   padding:0;
-  display: inherit;
+  // display: inherit;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  list-style: none;
   li {
     list-style-type: none;
-    float: left;
+    display: inline-block;
     padding: 0.5em;
     a, a:visited {
       text-decoration: none;
@@ -135,10 +139,19 @@ div#menu {
     list-style: none;
 	  margin: 0;
     padding: 1em 0 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    list-style: none;
     li {
       list-style-type: none;
-      display: inline;
+      display: inline-block;
       padding: 1em;
+      @media (max-width: 767.98px) { 
+        & {
+          padding: 0.25em 0.75em;
+        }
+      }
       a, a:visited {
         text-decoration: none;
         color: var(--gray-dark);

@@ -14,7 +14,9 @@
 </template>
 
 <script>
+/* eslint-disable no-underscore-dangle */
 import axios from 'axios';
+import _ from 'lodash';
 import PostCard from '@/components/PostCard';
 
 export default {
@@ -59,10 +61,10 @@ export default {
   },
   methods: {
     postSizeClass: (post) => {
-      if ('img' in post) {
-        return 'col-md-8';
+      if (_.has(post, 'img') && post.img != null) {
+        return 'col-sm-12 col-md-12 col-lg-8';
       }
-      return 'col-md-4';
+      return 'col-sm-12 col-md-6 col-lg-4';
     },
     setCategoryBySlug(categorySlug) {
       const self = this;
@@ -77,23 +79,28 @@ export default {
     },
     setPostsFromCategory(categoryId) {
       const self = this;
-      axios.get(`${self.apiBaseUrl}wp/v2/posts?categories=${categoryId}`)
+      axios.get(`${self.apiBaseUrl}wp/v2/posts?categories=${categoryId}&_embed=1`)
         .then((response) => {
           let apiPost = null;
           const posts = [];
           for (let p = 0; p < response.data.length; p += 1) {
             apiPost = response.data[p];
+            const featuredMedia = _.has(apiPost, '_embedded.wp:featuredmedia')
+              && apiPost._embedded['wp:featuredmedia'].length >= 1
+              ? apiPost._embedded['wp:featuredmedia'][0].media_details
+              : null;
             posts.push({
               id: apiPost.id,
               title: apiPost.title.rendered,
               tags: [],
               intro: apiPost.excerpt.rendered,
-              // img: apiPost._embedded["wp:featuredmedia"][0].source_url
+              img: _.has(featuredMedia, 'sizes.medium') ? featuredMedia.sizes.medium.source_url : null,
               link: apiPost.link,
             });
           }
           self.posts = posts;
-          // callback(posts);
+          // eslint-disable-next-line no-console
+          console.log(self.posts);
         })
         .catch((e) => {
           // eslint-disable-next-line no-console

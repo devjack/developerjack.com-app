@@ -111,16 +111,28 @@ export default {
 
 <style lang="scss">
 header {
+  text-align:center;
   ul {
     list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    list-style: none;
     li {
-      display: inline;
-      padding: auto 1rem;
-      &:after {
-        content: " | ";
-      }
-      &:last-child:after {
-        content: "";
+      display: inline-block;
+      padding: 1rem;
+
+      color: rgba(56,56,56,0.5);
+      font-size: 0.9em;
+      letter-spacing: 0.1em;
+      margin: 0;
+      text-transform: uppercase;
+      margin-right: 2em;
+      
+      @media (max-width: 767.98px) { 
+        & {
+          padding: 0.25em 0.75em;
+        }
       }
     }
   }

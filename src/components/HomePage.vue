@@ -59,9 +59,9 @@ export default {
   methods: {
     postSizeClass: (post) => {
       if (_.has(post, 'img') && post.img != null) {
-        return 'col-md-8';
+        return 'col-sm-12 col-md-12 col-lg-8';
       }
-      return 'col-md-4';
+      return 'col-sm-12 col-md-6 col-lg-4';
     },
   },
 };
