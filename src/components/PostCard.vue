@@ -1,28 +1,12 @@
 <template>
-  <article class="card post-card  flex-md-row mb-4 box-shadow h-md-250">
-    <img :if="post.img" class="card-img-left flex-auto" :src="post.img">
-    <div class="card-body  card-body d-flex flex-column align-items-start">
-      <h3>
-        <router-link :to="{ path: path}" v-html="post.title"></router-link>
-        <!-- <a :href="path">{{post.title}}</a> -->
-        </h3>
-      <span v-for="tag in post.tags" :key="tag" class="tag">{{ tag }}</span>
-      <p v-html="post.intro"></p>
-    </div>
-    <!-- <div class="post-image">
-      <img src="http://via.placeholder.com/350x300">
-    </div>
-    <div class="post-intro">
-      <header>
-        <h3>Lorem Titlem dol or amet</h3>
-        <span class="tag">Open Source</span>
-      </header>
-      <p>
-        Monotonectally pursue backward-compatible ideas without empowered imperatives. Interactively predominate low-risk high-yield ROI rather than adaptive e-tailers....
-      </p>
-    </div> <!-- /.post-intro -->
-
-  </article>
+  <router-link :to="{ path: path}" class="card post-card flex-md-row mb-4 box-shadow h-md-250">
+      <img v-if="post.img" class="col-sm-6 card-img card-img-left flex-auto" :src="post.img">
+      <div class="card-body  card-body d-flex flex-column align-items-start">
+        <h3 v-html="post.title"></h3>
+        <span v-for="tag in post.tags" :key="tag" class="tag">{{ tag }}</span>
+        <p v-html="post.intro"></p>
+      </div>
+  </router-link>
 </template>
 
 <script>
@@ -64,23 +48,33 @@ export default {
 
 <style lang="scss" scoped>
 .post-card.card {
+  &:link, &:active, &:hover &:visited {
+    text-decoration: none;
+    color: var(--gray-dark);
+  }
+  &:hover {
+    border-color:var(--gray);
+  }
   height: 300px;
   overflow: hidden;
+  img.card-img {
+    object-fit: cover;
+    max-height: 100%;
+    border-radius:0;
+    padding-left:0;
+  }
 
   .post-image {
     float: left;
     position: relative;
     width: 50%;
-    img {
-      object-fit: cover;
-      max-height: 100%;
-    }
   }
 
   p {
-    // white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    font-size: 1rem;
+    color: var(--gray-dark);
   }
 }
 </style>

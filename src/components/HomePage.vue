@@ -9,7 +9,9 @@
 </template>
 
 <script>
+/* eslint-disable no-underscore-dangle */
 import axios from 'axios';
+import _ from 'lodash';
 import PostCard from '@/components/PostCard';
 
 export default {
@@ -27,7 +29,7 @@ export default {
     const self = this;
     const apiBase = this.apiBaseUrl;
     // eslint-disable-next-line no-console
-    axios.get(`${apiBase}wp/v2/posts?categories_exclude=3`)
+    axios.get(`${apiBase}wp/v2/posts?categories_exclude=3&_embed=1`)
       .then((response) => {
         // JSON responses are automatically parsed.
         // eslint-disable-next-line no-console
@@ -35,19 +37,19 @@ export default {
         let apiPost = null;
         for (let p = 0; p < response.data.length; p += 1) {
           apiPost = response.data[p];
+          const featuredMedia = _.has(apiPost, '_embedded.wp:featuredmedia')
+            && apiPost._embedded['wp:featuredmedia'].length >= 1
+            ? apiPost._embedded['wp:featuredmedia'][0].media_details
+            : null;
           self.posts.push({
             id: apiPost.id,
             title: apiPost.title.rendered,
             tags: [],
             intro: apiPost.excerpt.rendered,
-            // img: apiPost._embedded["wp:featuredmedia"][0].source_url
+            img: _.has(featuredMedia, 'sizes.medium') ? featuredMedia.sizes.medium.source_url : null,
             link: apiPost.link,
           });
         }
-
-        // eslint-disable-next-line no-console
-        console.log(self.posts);
-        // this.posts = response.data
       })
       .catch((e) => {
         // eslint-disable-next-line no-console
@@ -56,7 +58,7 @@ export default {
   },
   methods: {
     postSizeClass: (post) => {
-      if ('img' in post) {
+      if (_.has(post, 'img') && post.img != null) {
         return 'col-md-8';
       }
       return 'col-md-4';
