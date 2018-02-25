@@ -89,11 +89,11 @@ export default {
         .then((response) => {
           this.loading = false;
           if (response.data.length === 0) {
-            this.error = '404 post not found';
+            this.error = 'The post you\'re looking for appears to have gone for a walk!';
           } else if (response.data.length > 1) {
             this.error = '400 Slugs galore!';
             // eslint-disable-next-line no-console
-            console.log('Slugs galore! Jack promised himself this would never happen!');
+            console.log('Could you be a bit more specific? That post doesn\'t exist!');
           } else {
             // For the 1x post that is returned...
             this.post = response.data[0];
@@ -128,7 +128,7 @@ header {
       margin: 0;
       text-transform: uppercase;
       margin-right: 2em;
-      
+
       @media (max-width: 767.98px) { 
         & {
           padding: 0.25em 0.75em;
